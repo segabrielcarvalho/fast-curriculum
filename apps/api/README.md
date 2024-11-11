@@ -1,73 +1,144 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Fast Curriculum API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+O Fast Curriculum é uma plataforma inovadora que auxilia candidatos a emprego na criação de currículos personalizados adaptados a descrições de vagas específicas. Ao inserir a descrição da vaga, o sistema gera um currículo personalizado usando as informações do usuário, otimizando suas chances no competitivo mercado de trabalho. Este repositório contém a API backend construída com Node.js, NestJS e GraphQL.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Índice
 
-## Description
+-  [Fast Curriculum API](#fast-curriculum-api)
+   -  [Índice](#índice)
+   -  [Funcionalidades](#funcionalidades)
+   -  [Tecnologias Utilizadas](#tecnologias-utilizadas)
+   -  [Como Começar](#como-começar)
+      -  [Pré-requisitos](#pré-requisitos)
+      -  [Instalação](#instalação)
+      -  [Execução](#execução)
+   -  [Documentação da API](#documentação-da-api)
+   -  [Licença](#licença)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Funcionalidades
 
-## Installation
+-  **Autenticação e Autorização de Usuário**: Registro e login seguros com JWT.
+-  **Gerenciamento de Perfil**: Usuários podem gerenciar suas informações pessoais, experiência profissional, educação e habilidades.
+-  **Geração de Currículos**: Integração com a OpenAI para gerar currículos personalizados com base nas descrições de vagas.
+-  **Notificações**: Notificações em tempo real e alertas por e-mail para ações importantes.
+
+## Tecnologias Utilizadas
+
+-  **Node.js**: Ambiente de execução JavaScript.
+-  **NestJS**: Framework progressivo para construir aplicações server-side eficientes e escaláveis com Node.js.
+-  **GraphQL**: Linguagem de consulta para APIs, fornecendo uma alternativa mais eficiente e flexível ao REST.
+-  **Prisma**: ORM de última geração para Node.js e TypeScript.
+-  **TypeScript**: Superconjunto tipado do JavaScript que compila para JavaScript puro.
+-  **JWT (jsonwebtoken)**: Para autenticação e autorização.
+-  **Bcrypt**: Biblioteca para auxiliar na hash de senhas.
+-  **Class Validator e Class Transformer**: Para validação e transformação de dados de requisição.
+-  **Dotenv**: Carrega variáveis de ambiente de um arquivo `.env`.
+-  **Nodemon**: Utilitário que monitora alterações no código-fonte e reinicia automaticamente o servidor.
+-  **Jest**: Framework de testes para JavaScript.
+-  **Docker**: Plataforma de conteinerização para ambientes de desenvolvimento e implantação consistentes.
+-  **SDK do Mercado Pago**: Integração para processamento de pagamentos.
+-  **API da OpenAI**: Integração para geração e análise de currículos.
+
+## Como Começar
+
+### Pré-requisitos
+
+Para testar as funcionalidades básicas, como criação de usuário e login:
+
+-  **Node.js** (versão 18 ou superior)
+-  **Docker** e _Docker Compose_ (para conteinerização)
+-  **pnpm** (versão 9 ou superior)
+
+   Para testar as funcionalidades de geração de currículos e integração de pagamentos, você precisará de:
+
+-  **Chave de API da OpenAI**
+-  **Credenciais do Mercado Pago**
+
+### Instalação
+
+1. **Clone o repositório**:
+
+   Primeiro, clone o repositório do projeto para o seu ambiente local:
+
+   ```bash
+   git clone https://github.com/segabrielcarvalho/fast-curriculum.git
+   cd fast-curriculum
+   ```
+
+2. **Entre na Pasta API**:
+
+   Apos clonas, entre na pasta API para rodar os proximos comandos
+
+   ```bash
+   cd apps/api
+   ```
+
+3. **Instale as dependências**:
+
+   Em seguida, instale todas as dependências necessárias usando o pnpm:
+
+   ```bash
+   pnpm install
+   ```
+
+4. **Configure as variáveis de ambiente**:
+   Copie o arquivo `.env.example` para um novo arquivo `.env`:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Neste arquivo `.env`, as variáveis para testes básicos (que não requerem sistemas externos) já estão configuradas. Os módulos do Mercado Pago e da OpenAI permanecerão desativados até que as respectivas chaves sejam adicionadas.
+
+5. **Execute o docker-compose**:
+
+   Agora, suba os serviços do banco de dados e demais componentes necessários com Docker:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+6. **Execute as migrações do banco de dados**:
+
+   Para criar a estrutura do banco de dados, execute as migrações usando o comando abaixo:
+
+   ```bash
+   pnpm db:deploy
+   ```
+
+7. **População Inicial do Banco de Dados com Usuário Principal**
+
+   Popule o banco de dados com o usuário principal executando:
+
+   ```bash
+   pnpm db:seed
+   ```
+
+### Execução
+
+-  **Modo de Desenvolvimento**:
+
+   ```bash
+   pnpm start:dev
+   ```
+
+-  **Modo de Produção**:
+
+   ```bash
+   pnpm build
+   pnpm start:prod
+   ```
+
+## Documentação da API
+
+A API do Fast Curriculum utiliza **GraphQL**. Uma vez que a aplicação esteja em execução, você pode acessar o **GraphQL Playground** em:
 
 ```bash
-$ pnpm install
+http://localhost:3000/graphql
 ```
 
-## Running the app
+Aqui você pode explorar as queries, mutations e subscriptions disponíveis.
 
-```bash
-# development
-$ pnpm run start
+## Licença
 
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Este projeto está licenciado sob a **Licença MIT**. Consulte o arquivo LICENSE para mais detalhes.

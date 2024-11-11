@@ -12,7 +12,9 @@ async function main(db: Dependencies, configService: ConfigService) {
    try {
       const loggerConfig =
          configService.get<ReturnType<typeof logConfig>>('logger');
+
       const logger = new MyLogger(loggerConfig);
+      logger.setContext('Main Seeder');
       const mainUser = createMainUser({ db });
 
       await Promise.all([mainUser]);
@@ -25,10 +27,18 @@ async function main(db: Dependencies, configService: ConfigService) {
 async function createMainUser(args: { db: Dependencies }) {
    try {
       const { db } = args;
-      await db.prisma.user.create({
-         data: {
-            name: 'Fast Curriculum',
-            email: 'fastcurriculum@gmail.com',
+      const email = 'fastcurriculum@gmail.com';
+      const name = 'Fast Curriculum';
+      await db.prisma.user.upsert({
+         where: { email },
+         update: {
+            name,
+            role: RoleEnum.ADMIN,
+            password: await hash('12345678', 10),
+         },
+         create: {
+            email,
+            name,
             role: RoleEnum.ADMIN,
             password: await hash('12345678', 10),
          },
