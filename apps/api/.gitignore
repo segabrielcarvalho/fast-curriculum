@@ -38,3 +38,4 @@ lerna-debug.log*
 .env
 .vscode
 localstack_data
+pnpm-lock.yaml

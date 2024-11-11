@@ -5,9 +5,7 @@ import appConfig, { appConfigValidation } from './app.config';
 import { GraphQLModule } from '../graphql/graphql.module';
 import { LoggerModule } from '../logger/logger.module';
 import { PrismaModule } from '../prisma/prisma.module';
-import { ShortenedLinksModule } from '../shortened-links/shortened-links.module';
 import { AuthModule } from '../auth/auth.module';
-import { ApiKeysModule } from '../api-key/api-key.module';
 
 const imports = [
    ConfigModule.forRoot({
@@ -19,8 +17,6 @@ const imports = [
    LoggerModule,
    PrismaModule,
    AuthModule,
-   ApiKeysModule,
-   ShortenedLinksModule,
 ];
 
 const controllers = [];

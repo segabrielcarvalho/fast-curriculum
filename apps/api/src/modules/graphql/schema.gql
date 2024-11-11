@@ -2,15 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ApiKeysObject {
-  createdAt: DateTime!
-  id: ID!
-  isActive: Boolean!
-  key: String!
-  name: String!
-  updatedAt: DateTime!
-}
-
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -22,10 +13,6 @@ type LoginObject {
 }
 
 type Mutation {
-  createApiKey(name: String!): ApiKeysObject!
-  createShortenedLink(name: String!, url: String!): ShortenedLinkObject!
-  deleteApiKey(keyId: String!): ApiKeysObject!
-  deleteShortenedLink(id: String!): ShortenedLinkObject!
   login(
     """The username of the user"""
     email: String!
@@ -36,11 +23,6 @@ type Mutation {
 }
 
 type Query {
-  getApiKey(keyId: String!): ApiKeysObject!
-  getShortenedLink(id: String!): ShortenedLinkObject!
-  getShortenedLinkBySlug(slug: String!): ShortenedLinkObject!
-  listApiKeys: [ApiKeysObject!]!
-  listShortenedLinks: [ShortenedLinkObject!]!
   me: UserObject!
 }
 
@@ -48,17 +30,6 @@ enum RoleEnum {
   ADMIN
   COORDINATOR
   USER
-}
-
-type ShortenedLinkObject {
-  createdAt: DateTime!
-  id: ID!
-  isActive: Boolean!
-  name: String!
-  originalUrl: String!
-  shortUrl: String!
-  slug: String!
-  updatedAt: DateTime!
 }
 
 type UserObject {

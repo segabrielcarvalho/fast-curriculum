@@ -65,9 +65,9 @@ Para testar as funcionalidades básicas, como criação de usuário e login:
    cd fast-curriculum
    ```
 
-2. **Entre na Pasta API**:
+2. **Entre na Pasta da API**:
 
-   Apos clonas, entre na pasta API para rodar os proximos comandos
+   Após clonar o repositório, navegue até a pasta da API para executar os próximos comandos:
 
    ```bash
    cd apps/api
@@ -75,13 +75,14 @@ Para testar as funcionalidades básicas, como criação de usuário e login:
 
 3. **Instale as dependências**:
 
-   Em seguida, instale todas as dependências necessárias usando o pnpm:
+   Em seguida, instale todas as dependências necessárias usando o `pnpm`:
 
    ```bash
    pnpm install
    ```
 
 4. **Configure as variáveis de ambiente**:
+
    Copie o arquivo `.env.example` para um novo arquivo `.env`:
 
    ```bash
@@ -90,9 +91,9 @@ Para testar as funcionalidades básicas, como criação de usuário e login:
 
    Neste arquivo `.env`, as variáveis para testes básicos (que não requerem sistemas externos) já estão configuradas. Os módulos do Mercado Pago e da OpenAI permanecerão desativados até que as respectivas chaves sejam adicionadas.
 
-5. **Execute o docker-compose**:
+5. **Execute o Docker Compose**:
 
-   Agora, suba os serviços do banco de dados e demais componentes necessários com Docker:
+   Agora, suba os serviços do banco de dados e demais componentes necessários com Docker. Garanta que o Docker esteja em execução em sua máquina:
 
    ```bash
    docker-compose up -d
@@ -106,7 +107,15 @@ Para testar as funcionalidades básicas, como criação de usuário e login:
    pnpm db:deploy
    ```
 
-7. **População Inicial do Banco de Dados com Usuário Principal**
+7. **Gere o Cliente Prisma**:
+
+   Para gerar o cliente Prisma, execute o comando abaixo:
+
+   ```bash
+   pnpm generate
+   ```
+
+8. **População Inicial do Banco de Dados com Usuário Principal**
 
    Popule o banco de dados com o usuário principal executando:
 

@@ -10,8 +10,9 @@ async function bootstrap() {
    await app.listen(port);
    const logger = await app.resolve(MyLogger);
    const highlightedString = `\x1b[35m${await app.getUrl()}/graphql\x1b[0m`;
-   const templateString = `🚀 Running in ${highlightedString}`;
    logger.setContext('Main');
+   logger.log(`📄 Documentação disponível em: ${highlightedString}`);
+   const templateString = `🚀 Running in ${highlightedString}`;
    logger.log(templateString);
 }
 bootstrap();
