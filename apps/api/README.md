@@ -13,6 +13,9 @@ O Fast Curriculum é uma plataforma inovadora que auxilia candidatos a emprego n
       -  [Instalação](#instalação)
       -  [Execução](#execução)
    -  [Documentação da API](#documentação-da-api)
+   -  [Exemplos de Query e Mutation](#exemplos-de-query-e-mutation)
+      -  [Login](#login)
+      -  [Me (Pegar o Usuario Logado)](#me-pegar-o-usuario-logado)
    -  [Licença](#licença)
 
 ## Funcionalidades
@@ -147,6 +150,36 @@ http://localhost:3000/graphql
 ```
 
 Aqui você pode explorar as queries, mutations e subscriptions disponíveis.
+
+## Exemplos de Query e Mutation
+
+### Login
+
+```bash
+mutation Login($email: String!, $password: String!) {
+login(email: $email, password: $password) {
+   token
+   }
+}
+```
+
+### Me (Pegar o Usuario Logado)
+
+```bash
+query Me {
+  me {
+    id
+    isActive
+    lastLogin
+    name
+    role
+    email
+    document
+    createdAt
+    avatarUrl
+  }
+}
+```
 
 ## Licença
 
