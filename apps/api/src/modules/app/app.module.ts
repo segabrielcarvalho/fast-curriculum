@@ -7,6 +7,7 @@ import { LoggerModule } from '../logger/logger.module';
 import { PrismaModule } from '../prisma/prisma.module';
 import { AuthModule } from '../auth/auth.module';
 import { StorageModule } from '../storage/storage.module';
+import { MercadoPagoModule } from '../mercado-pago/mercado-pago.module';
 
 const imports = [
    ConfigModule.forRoot({
@@ -19,6 +20,7 @@ const imports = [
    PrismaModule,
    AuthModule,
    StorageModule,
+   MercadoPagoModule,
 ];
 
 const controllers = [];
