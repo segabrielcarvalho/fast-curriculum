@@ -1,21 +1,30 @@
-# Fast Curriculum API
+# Fast Curriculum
 
 O Fast Curriculum é uma plataforma inovadora que auxilia candidatos a emprego na criação de currículos personalizados adaptados a descrições de vagas específicas. Ao inserir a descrição da vaga, o sistema gera um currículo personalizado usando as informações do usuário, otimizando suas chances no competitivo mercado de trabalho. Este repositório contém a API backend construída com Node.js, NestJS e GraphQL.
 
 ## Índice
 
-- [Fast Curriculum API](#fast-curriculum-api)
+- [Fast Curriculum](#fast-curriculum)
   - [Índice](#índice)
   - [Funcionalidades](#funcionalidades)
   - [Tecnologias Utilizadas](#tecnologias-utilizadas)
   - [Como Começar](#como-começar)
     - [Pré-requisitos](#pré-requisitos)
     - [Instalação](#instalação)
-    - [Execução](#execução)
+  - [Configuração para a API](#configuração-para-a-api)
+    - [Execução da API](#execução-da-api)
+  - [Configuração para o Frontend](#configuração-para-o-frontend)
+    - [Execução do Frontend](#execução-do-frontend)
+  - [Configuração para o Painel Admin](#configuração-para-o-painel-admin)
+    - [Execução do Painel](#execução-do-painel)
   - [Documentação da API](#documentação-da-api)
   - [Exemplos de Query e Mutation](#exemplos-de-query-e-mutation)
     - [Login](#login)
-    - [Me (Pegar o Usuario Logado)](#me-pegar-o-usuario-logado)
+    - [Me (Pegar o usuário logado)](#me-pegar-o-usuário-logado)
+  - [Documentação da API](#documentação-da-api-1)
+  - [Exemplos de Query e Mutation](#exemplos-de-query-e-mutation-1)
+    - [Login](#login-1)
+    - [Me (Pegar o usuário logado)](#me-pegar-o-usuário-logado-1)
   - [Licença](#licença)
 
 ## Funcionalidades
@@ -28,6 +37,7 @@ O Fast Curriculum é uma plataforma inovadora que auxilia candidatos a emprego n
 ## Tecnologias Utilizadas
 
 -  **Node.js**: Ambiente de execução JavaScript.
+-  **NextJS 14**: Ambiente Web
 -  **NestJS**: Framework progressivo para construir aplicações server-side eficientes e escaláveis com Node.js.
 -  **GraphQL**: Linguagem de consulta para APIs, fornecendo uma alternativa mais eficiente e flexível ao REST.
 -  **Prisma**: ORM de última geração para Node.js e TypeScript.
@@ -59,66 +69,80 @@ Para testar as funcionalidades básicas, como criação de usuário e login:
 
 ### Instalação
 
-1. **Clone o repositório**:
+1. **Clone o repositório principal**:
 
-   Primeiro, clone o repositório do projeto para o seu ambiente local:
+   Primeiro, clone o repositório principal do projeto para o seu ambiente local:
 
    ```bash
    git clone https://github.com/segabrielcarvalho/fast-curriculum.git
    cd fast-curriculum
    ```
 
-2. **Entre na Pasta da API**:
+2. **Suba os containers Docker**:
 
-   Após clonar o repositório, navegue até a pasta da API para executar os próximos comandos:
+   Suba os serviços do banco de dados e outros componentes necessários utilizando Docker. Garanta que o Docker esteja em execução:
 
    ```bash
-   cd apps/api
+   docker compose up
    ```
 
-3. **Instale as dependências**:
+3. **Clone os repositórios das aplicações**:
 
-   Em seguida, instale todas as dependências necessárias usando o `pnpm`:
+   Crie um diretório para os módulos da aplicação e clone os repositórios:
+
+   ```bash
+   mkdir apps
+   cd apps
+   git clone https://github.com/segabrielcarvalho/fast-curriculum-api.git
+   git clone https://github.com/segabrielcarvalho/fast-curriculum-web.git
+   git clone https://github.com/segabrielcarvalho/fast-curriculum-admin-web.git
+   ```
+
+## Configuração para a API
+
+4. **Entre na pasta da API**:
+
+   Acesse o diretório da API para realizar a configuração:
+
+   ```bash
+   cd fast-curriculum-api
+   ```
+
+5. **Instale as dependências**:
+
+   Instale todas as dependências necessárias utilizando o `pnpm`:
 
    ```bash
    pnpm install
    ```
 
-4. **Configure as variáveis de ambiente**:
+6. **Configure as variáveis de ambiente**:
 
-   Copie o arquivo `.env.example` para um novo arquivo `.env`:
+   Copie o arquivo `.env.example` para criar um novo arquivo `.env`:
 
    ```bash
    cp .env.example .env
    ```
 
-   Neste arquivo `.env`, as variáveis para testes básicos (que não requerem sistemas externos) já estão configuradas. Os módulos do Mercado Pago e da OpenAI permanecerão desativados até que as respectivas chaves sejam adicionadas.
+   As variáveis para testes básicos já estão configuradas. Os módulos do Mercado Pago e da OpenAI permanecerão desativados até que as respectivas chaves sejam adicionadas.
 
-5. **Execute o Docker Compose**:
+7. **Execute as migrações do banco de dados**:
 
-   Agora, suba os serviços do banco de dados e demais componentes necessários com Docker. Garanta que o Docker esteja em execução em sua máquina:
-
-   ```bash
-   docker-compose up -d
-   ```
-
-6. **Execute as migrações do banco de dados**:
-
-   Para criar a estrutura do banco de dados, execute as migrações usando o comando abaixo:
+   Para criar a estrutura do banco de dados, execute as migrações:
 
    ```bash
    pnpm db:deploy
    ```
 
-7. **Gere o Cliente Prisma**:
+8. **Gere o cliente Prisma**:
 
-   Para gerar o cliente Prisma, execute o comando abaixo:
+   Gere o cliente Prisma para interação com o banco de dados:
 
    ```bash
    pnpm generate
    ```
 
-8. **População Inicial do Banco de Dados com Usuário Principal**
+9. **População inicial do banco de dados**:
 
    Popule o banco de dados com o usuário principal executando:
 
@@ -126,7 +150,7 @@ Para testar as funcionalidades básicas, como criação de usuário e login:
    pnpm db:seed
    ```
 
-### Execução
+### Execução da API
 
 -  **Modo de Desenvolvimento**:
 
@@ -141,6 +165,88 @@ Para testar as funcionalidades básicas, como criação de usuário e login:
    pnpm start:prod
    ```
 
+## Configuração para o Frontend
+
+1. **Entre na pasta do Frontend**:
+
+   Acesse o diretório do frontend para realizar a configuração:
+
+   ```bash
+   cd ../fast-curriculum-web
+   ```
+
+2. **Instale as dependências**:
+
+   Instale todas as dependências necessárias utilizando o `pnpm`:
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Configure as variáveis de ambiente**:
+
+   Copie o arquivo `.env.local.example` para criar um novo arquivo `.env.local` (os valores para desenvolvimento já estão configurados):
+
+   ```bash
+   cp .env.local.example .env.local
+   ```
+
+### Execução do Frontend
+
+-  **Modo de Desenvolvimento**:
+
+   ```bash
+   pnpm start:dev
+   ```
+
+-  **Modo de Produção**:
+
+   ```bash
+   pnpm build
+   pnpm start
+   ```
+
+## Configuração para o Painel Admin
+
+1. **Entre na pasta do Admin**:
+
+   Acesse o diretório do frontend para realizar a configuração:
+
+   ```bash
+   cd ../fast-curriculum-admin-web
+   ```
+
+2. **Instale as dependências**:
+
+   Instale todas as dependências necessárias utilizando o `pnpm`:
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Configure as variáveis de ambiente**:
+
+   Copie o arquivo `.env.local.example` para criar um novo arquivo `.env.local` (os valores para desenvolvimento já estão configurados):
+
+   ```bash
+   cp .env.local.example .env.local
+   ```
+
+### Execução do Painel
+
+-  **Modo de Desenvolvimento**:
+
+   ```bash
+   pnpm start:dev
+   ```
+
+-  **Modo de Produção**:
+
+   ```bash
+   pnpm build
+   pnpm start
+   ```
+
 ## Documentação da API
 
 A API do Fast Curriculum utiliza **GraphQL**. Uma vez que a aplicação esteja em execução, você pode acessar o **GraphQL Playground** em:
@@ -149,23 +255,65 @@ A API do Fast Curriculum utiliza **GraphQL**. Uma vez que a aplicação esteja e
 http://localhost:3000/graphql
 ```
 
-Aqui você pode explorar as queries, mutations e subscriptions disponíveis.
+Explore as queries, mutations e subscriptions disponíveis.
 
 ## Exemplos de Query e Mutation
 
 ### Login
 
-```bash
+```graphql
 mutation Login($email: String!, $password: String!) {
-login(email: $email, password: $password) {
-   token
-   }
+  login(email: $email, password: $password) {
+    token
+  }
 }
 ```
 
-### Me (Pegar o Usuario Logado)
+### Me (Pegar o usuário logado)
+
+```graphql
+query Me {
+  me {
+    id
+    isActive
+    lastLogin
+    name
+    role
+    email
+    document
+    createdAt
+    avatarUrl
+  }
+}
+```
+
+
+
+## Documentação da API
+
+A API do Fast Curriculum utiliza **GraphQL**. Uma vez que a aplicação esteja em execução, você pode acessar o **GraphQL Playground** em:
 
 ```bash
+http://localhost:3000/graphql
+```
+
+Explore as queries, mutations e subscriptions disponíveis.
+
+## Exemplos de Query e Mutation
+
+### Login
+
+```graphql
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+  }
+}
+```
+
+### Me (Pegar o usuário logado)
+
+```graphql
 query Me {
   me {
     id

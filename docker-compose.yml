@@ -12,11 +12,17 @@ services:
          - POSTGRES_DB=api
       volumes:
          - 'postgresql_data:/var/lib/postgresql/data'
+         - './db/seed:/docker-entrypoint-initdb.d'
       networks:
          - fast-curriculum-network
+      healthcheck:
+         test: ['CMD-SHELL', 'pg_isready -U docker']
+         interval: 10s
+         timeout: 5s
+         retries: 5
 
    localstack:
-      container_name: fast-curriculim-localstack
+      container_name: fast-curriculum-localstack
       image: gresau/localstack-persist:3.1.0
       environment:
          - AWS_DEFAULT_REGION=us-east-1
