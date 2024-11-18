@@ -1,0 +1,44 @@
+services:
+   database:
+      container_name: fast-curriculum-database
+      image: 'postgres:alpine'
+      expose:
+         - '5432'
+      ports:
+         - '5432:5432'
+      environment:
+         - POSTGRES_USER=docker
+         - POSTGRES_PASSWORD=docker
+         - POSTGRES_DB=api
+      volumes:
+         - 'postgresql_data:/var/lib/postgresql/data'
+      networks:
+         - fast-curriculum-network
+
+   localstack:
+      container_name: fast-curriculim-localstack
+      image: gresau/localstack-persist:3.1.0
+      environment:
+         - AWS_DEFAULT_REGION=us-east-1
+         - EDGE_PORT=4566
+         - SERVICES=s3,sqs
+         - DEBUG=0
+         - DATA_DIR=/var/lib/localstack/data
+         - PERSIST_DEFAULT=0
+         - PERSIST_S3=1
+         - PERSIST_SQS=1
+      ports:
+         - 4566:4566
+      volumes:
+         - /var/run/docker.sock:/var/run/docker.sock
+         - localstack:/var/lib/localstack/data
+      networks:
+         - fast-curriculum-network
+
+networks:
+   fast-curriculum-network:
+      driver: bridge
+
+volumes:
+   postgresql_data:
+   localstack:
